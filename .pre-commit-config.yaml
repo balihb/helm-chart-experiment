@@ -8,6 +8,9 @@ repos:
         args: [ --fix=no ]
       - id: check-yaml
         args: [ --allow-multiple-documents ]
+      - id: check-json
+      - id: check-xml
+      - id: check-toml
   - repo: https://github.com/pycqa/flake8
     rev: '3.9.2'
     hooks:
