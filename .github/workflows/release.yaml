@@ -57,7 +57,7 @@ jobs:
           git push origin ${{ steps.gitversion.outputs.semVer }}
       - name: VERSION file
         run: |
-          echo "${{ steps.gitversion.outputs.semVer }}" > VERSION
+          echo "${{ steps.gitversion.outputs.semVer }}" > example_server/src/example_server/VERSION
           git status
           ls
       - name: build deps
