@@ -66,4 +66,5 @@ jobs:
       - name: build Python package
         run: |
           cd example_server
+          pwd
           python3 -m build
