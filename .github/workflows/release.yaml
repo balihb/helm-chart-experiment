@@ -58,6 +58,8 @@ jobs:
       - name: VERSION file
         run: |
           echo "${{ steps.gitversion.outputs.semVer }}" > VERSION
+          git status
+          ls
       - name: build deps
         run: |
           python3 -m pip install --upgrade pip setuptools wheel build
