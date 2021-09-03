@@ -51,3 +51,7 @@ jobs:
           echo "CommitsSinceVersionSourcePadded: ${{ steps.gitversion.outputs.commitsSinceVersionSourcePadded }}"
           echo "UncommittedChanges: ${{ steps.gitversion.outputs.uncommittedChanges }}"
           echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
+      - name: tag release
+        run: |
+          git tag ${{ steps.gitversion.outputs.semVer }}
+          git push origin ${{ steps.gitversion.outputs.semVer }}
