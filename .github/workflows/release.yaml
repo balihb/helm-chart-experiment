@@ -67,4 +67,4 @@ jobs:
         run: |
           cd example_server
           pwd
-          python3 -m build
+          python3 -m build --wheel
