@@ -60,9 +60,9 @@ jobs:
           echo "${{ steps.gitversion.outputs.semVer }}" > example_server/src/example_server/VERSION
           git status
           ls
-#      - name: build deps
-#        run: |
-#          python3 -m pip install --upgrade pip setuptools wheel build
+      - name: build deps
+        run: |
+          python3 -m pip install --upgrade build
       - name: build Python package
         run: |
           cd example_server
