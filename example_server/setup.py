@@ -2,7 +2,7 @@ import os
 
 from setuptools import setup, find_packages
 
-version_file = open(os.path.join('..', 'VERSION'))
+version_file = open(os.path.join('../..', 'VERSION'))
 
 setup(
   name="example_server",
