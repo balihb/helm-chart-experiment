@@ -67,5 +67,5 @@ jobs:
         run: |
           cd example_server
           pwd
-          python3 -m build --wheel
+          python3 -m build --sdist
           ls dist
