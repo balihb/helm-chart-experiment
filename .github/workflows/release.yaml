@@ -55,3 +55,13 @@ jobs:
         run: |
           git tag ${{ steps.gitversion.outputs.semVer }}
           git push origin ${{ steps.gitversion.outputs.semVer }}
+      - name: VERSION file
+        run: |
+          echo "${{ steps.gitversion.outputs.semVer }}" > VERSION
+      - name: build deps
+        run: |
+          python3 -m pip install --upgrade pip setuptools wheel build
+      - name: build Python package
+        run: |
+          cd example_server
+          python3 -m build
