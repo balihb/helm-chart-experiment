@@ -13,8 +13,8 @@ RUN python3 -m pip install --upgrade pip setuptools wheel build
 # build
 COPY . ./src
 RUN ls
-RUN ls ./src/
-RUN cd src && python3 -m build
+RUN ls ./src/src/example_server
+RUN cd src && python3 -m build --wheel
 RUN cd src && find
 
 # setup runtime venv

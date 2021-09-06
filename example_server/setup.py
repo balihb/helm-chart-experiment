@@ -1,12 +1,17 @@
 import os
 
 from setuptools import setup, find_packages
+import os.path
 
-version_file = open(os.path.join('src/example_server', 'VERSION'))
+version_file = open(os.path.join(
+  os.path.abspath(os.path.dirname(__file__)),
+  'VERSION'
+))
+version = version_file.read().strip()
 
 setup(
   name="example_server",
-  version=version_file.read().strip(),
+  version=version,
   install_requires=[
     'jsonpickle == 2.0.0'
   ],

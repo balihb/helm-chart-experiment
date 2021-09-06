@@ -51,21 +51,23 @@ jobs:
           echo "CommitsSinceVersionSourcePadded: ${{ steps.gitversion.outputs.commitsSinceVersionSourcePadded }}"
           echo "UncommittedChanges: ${{ steps.gitversion.outputs.uncommittedChanges }}"
           echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
-      - name: tag release
-        run: |
-          git tag ${{ steps.gitversion.outputs.semVer }}
-          git push origin ${{ steps.gitversion.outputs.semVer }}
+#      - name: tag release
+#        run: |
+#          git tag ${{ steps.gitversion.outputs.semVer }}
+#          git push origin ${{ steps.gitversion.outputs.semVer }}
       - name: VERSION file
         run: |
-          echo "${{ steps.gitversion.outputs.semVer }}" > example_server/src/example_server/VERSION
-          git status
-          ls
+          echo "${{ steps.gitversion.outputs.semVer }}" > example_server/VERSION
       - name: build deps
         run: |
           python3 -m pip install --upgrade build
       - name: build Python package
         run: |
           cd example_server
-          pwd
           python3 -m build --sdist
-          ls dist
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "example_server/dist/*.tar.gz"
+          tag: ${{ steps.gitversion.outputs.semVer }}
+          commit: ${{ github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
