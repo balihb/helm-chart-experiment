@@ -103,9 +103,49 @@ jobs:
         run: |
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
-      - uses: ncipollo/release-action@v1
+
+      - name: Update chart version in the related HelmChart Charts.yaml
+        uses: fjogeleit/yaml-update-action@master
         with:
-          artifacts: "example_server/dist/*.tar.gz"
-          tag: ${{ steps.gitversion.outputs.semVer }}
-          commit: ${{ github.ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          valueFile: 'charts/example_server/Chart.yaml'
+          propertyPath: 'version'
+          value: ${{ steps.gitversion.outputs.semVer }}
+          createPR: false
+          commitChange: false
+          updateFile: true
+          message: 'Update chart version to ${{ steps.image.outputs.version }}'
+      - name: Update appVersion in the related HelmChart Charts.yaml
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          valueFile: 'charts/example_server/Chart.yaml'
+          propertyPath: 'appVersion'
+          value: "${{ steps.gitversion.outputs.semVer }}"
+          createPR: false
+          commitChange: false
+          updateFile: true
+          message: 'Update appVersion to ${{ steps.image.outputs.version }}'
+
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.6.3
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.2.1
+        with:
+          charts_dir: charts
+          charts_repo_url: https://balihb.github.io/helm-charts/helm-chart-experiment
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+#      - uses: ncipollo/release-action@v1
+#        with:
+#          artifacts: "example_server/dist/*.tar.gz"
+#          tag: ${{ steps.gitversion.outputs.semVer }}
+#          commit: ${{ github.ref }}
+#          token: ${{ secrets.GITHUB_TOKEN }}
