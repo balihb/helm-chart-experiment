@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  example_server:
+  - apiVersion: v2
+    appVersion: 0.2.2
+    created: "2021-09-06T06:19:35.793258332Z"
+    description: A Helm chart for Kubernetes
+    digest: 4afd2ab86912eba182246795f1344642806a69fa23bf573750d30e9befc5f7e7
+    name: example_server
+    type: application
+    urls:
+    - https://github.com/balihb/helm-chart-experiment/releases/download/example_server-0.2.2/example_server-0.2.2.tgz
+    version: 0.2.2
+generated: "2021-09-06T06:19:35.793265233Z"
