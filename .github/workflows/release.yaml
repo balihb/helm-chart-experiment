@@ -137,8 +137,8 @@ jobs:
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.2.1
-        with:
-          config: cr.yaml
+#        with:
+#          config: cr.yaml
 #          charts_dir: charts
 #          charts_repo_url: https://balihb.github.io/helm-charts/helm-chart-experiment
         env:
