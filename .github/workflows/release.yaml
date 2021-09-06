@@ -14,7 +14,7 @@ jobs:
       - uses: pre-commit/action@v2.0.3
       - uses: gittools/actions/gitversion/setup@v0.9.10
         with:
-          versionSpec: '5.7.0'
+          versionSpec: 5.7.0
       - id: gitversion
         uses: gittools/actions/gitversion/execute@v0.9.10
       - name: Display GitVersion outputs
@@ -91,7 +91,9 @@ jobs:
           file: ./example_server/Dockerfile
           push: true
           builder: ${{ steps.buildx.outputs.name }}
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/example_server:${{ steps.gitversion.outputs.semVer }}
+          tags: |
+            ${{ secrets.DOCKER_HUB_USERNAME }}/example_server:${{ steps.gitversion.outputs.semVer }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/example_server:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
       - # Temp fix
