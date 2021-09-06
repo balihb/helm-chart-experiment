@@ -29,6 +29,8 @@ RUN python3 -m pip uninstall -y setuptools wheel pip
 # runtime image
 FROM python:${base_image_version}
 
+LABEL org.opencontainers.image.source = "https://github.com/balihb/helm-chart-experiment"
+
 # copy venv
 ENV VIRTUAL_ENV=/opt/venv
 COPY --from=builder /opt/venv $VIRTUAL_ENV
