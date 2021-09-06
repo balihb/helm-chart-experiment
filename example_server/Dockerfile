@@ -8,7 +8,7 @@ ENV OLD_PATH=$PATH
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # install build tools
-RUN python3 -m pip install --upgrade pip setuptools wheel build
+RUN python3 -m pip install --no-cache-dir --upgrade pip setuptools wheel build
 
 # build
 COPY . ./src
@@ -21,7 +21,7 @@ RUN python3 -m venv --system-site-packages $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$OLD_PATH"
 
 # install package
-RUN cd src && pip install --disable-pip-version-check --use-feature=in-tree-build ./dist/example_server-*.whl
+RUN cd src && pip install --no-cache-dir --disable-pip-version-check --use-feature=in-tree-build ./dist/example_server-*.whl
 
 # remove build tools
 RUN python3 -m pip uninstall -y setuptools wheel pip
@@ -33,8 +33,5 @@ FROM python:${base_image_version}
 ENV VIRTUAL_ENV=/opt/venv
 COPY --from=builder /opt/venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
-ENV EXAMPLE_HTTP_SERVER_PORT=8080
-EXPOSE $EXAMPLE_HTTP_SERVER_PORT
 
 CMD 'example-server'

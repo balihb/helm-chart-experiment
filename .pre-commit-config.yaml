@@ -16,11 +16,11 @@ repos:
       - id: check-xml
       - id: check-toml
   - repo: https://github.com/pycqa/flake8
-    rev: '3.9.2'
+    rev: 3.9.2
     hooks:
       - id: flake8
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-    rev: '2.3.54'
+    rev: 2.3.54
     hooks:
       - id: editorconfig-checker
         alias: ec
