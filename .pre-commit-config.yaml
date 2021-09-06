@@ -8,6 +8,10 @@ repos:
         args: [ --fix=no ]
       - id: check-yaml
         args: [ --allow-multiple-documents ]
+        exclude: |
+          (?x)^(
+              charts/example_server/templates/.+.yaml
+          )$
       - id: check-json
       - id: check-xml
       - id: check-toml
