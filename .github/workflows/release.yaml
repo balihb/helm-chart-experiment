@@ -143,9 +143,9 @@ jobs:
 #          charts_repo_url: https://balihb.github.io/helm-charts/helm-chart-experiment
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-#      - uses: ncipollo/release-action@v1
-#        with:
-#          artifacts: "example_server/dist/*.tar.gz"
-#          tag: ${{ steps.gitversion.outputs.semVer }}
-#          commit: ${{ github.ref }}
-#          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "example_server/dist/*.tar.gz"
+          tag: ${{ steps.gitversion.outputs.semVer }}
+          commit: ${{ github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
