@@ -125,7 +125,6 @@ jobs:
           updateFile: true
           message: 'Update appVersion to ${{ steps.image.outputs.version }}'
 
-
       - name: Configure Git
         run: |
           git config user.name "$GITHUB_ACTOR"
